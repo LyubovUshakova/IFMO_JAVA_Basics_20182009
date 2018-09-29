@@ -35,7 +35,6 @@ public class BottleSong {
 
     public BottleSong(int bottleTakenAtOnce) {
         this.bottleTakenAtOnce=bottleTakenAtOnce;
-        //TODO
     }
 
     public String getBottleSongLyrics() {
@@ -45,9 +44,14 @@ public class BottleSong {
             String s = bukovki(bottleTakenAtOnce);
             while (bottles > bottleTakenAtOnce) {
                 bottles -= bottleTakenAtOnce;
-                text = text + "Take " + s + " down and pass around, " + Integer.toString(bottles) + " bottles of beer on the wall.\n"
-                        + Integer.toString(bottles) + " bottles of beer on the wall, " + Integer.toString(bottles) + " bottles of beer.\n";
-            }
+                if(bottles>1) {
+                    text = text + "Take " + s + " down and pass around, " + Integer.toString(bottles) + " bottles of beer on the wall.\n"
+                            + Integer.toString(bottles) + " bottles of beer on the wall, " + Integer.toString(bottles) + " bottles of beer.\n";
+                }else {
+                    text = text + "Take " + s + " down and pass around, " + Integer.toString(bottles) + " bottle of beer on the wall.\n"
+                            + Integer.toString(bottles) + " bottle of beer on the wall, " + Integer.toString(bottles) + " bottle of beer.\n";
+                }
+                }
             text += "Take " + bukovki(bottles) + " down and pass around, no more bottles of beer on the wall.\n" +
                     "No more bottles of beer on the wall, no more bottles of beer.\n" +
                     "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
@@ -55,8 +59,6 @@ public class BottleSong {
 
         }else
 
-
-            //TODO
             throw new UnsupportedOperationException();
     }
     public String bukovki(int chiselki){
@@ -102,7 +104,6 @@ public class BottleSong {
             int mod = chiselki % 10;
             String s1 = "";
             String s2 = "";
-            //if (a>=2)
             switch (div) {
                 case 2:
                     s1 = "twenty";
@@ -163,4 +164,3 @@ public class BottleSong {
         return s;
     }
 }
-
