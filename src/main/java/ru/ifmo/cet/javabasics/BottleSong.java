@@ -51,7 +51,7 @@ public class BottleSong {
                     text = text + "Take " + s + " down and pass around, " + Integer.toString(bottles) + " bottle of beer on the wall.\n"
                             + Integer.toString(bottles) + " bottle of beer on the wall, " + Integer.toString(bottles) + " bottle of beer.\n";
                 }
-                }
+            }
             text += "Take " + bukovki(bottles) + " down and pass around, no more bottles of beer on the wall.\n" +
                     "No more bottles of beer on the wall, no more bottles of beer.\n" +
                     "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
@@ -59,108 +59,121 @@ public class BottleSong {
 
         }else
 
-            throw new UnsupportedOperationException();
+            throw new IllegalArgumentException();
     }
     public String bukovki(int chiselki){
-        String s = "";
+        String result = "";
         if ((chiselki > 9) && (chiselki < 20)) {
 
             switch (chiselki) {
 
                 case 10:
-                    s = "ten";
+                    result = "ten";
                     break;
                 case 11:
-                    s = "eleven";
+                    result = "eleven";
                     break;
                 case 12:
-                    s = "twelve";
+                    result = "twelve";
                     break;
                 case 13:
-                    s = "thirteen";
+                    result = "thirteen";
                     break;
                 case 14:
-                    s = "fourteen";
+                    result = "fourteen";
                     break;
                 case 15:
-                    s = "fifteen";
+                    result = "fifteen";
                     break;
                 case 16:
-                    s = "sixteen";
+                    result = "sixteen";
                     break;
                 case 17:
-                    s = "seventeen";
+                    result = "seventeen";
                     break;
                 case 18:
-                    s = "eighteen";
+                    result = "eighteen";
                     break;
                 case 19:
-                    s = "nineteen";
+                    result = "nineteen";
                     break;
             }
 
         } else {
             int div = chiselki / 10;
             int mod = chiselki % 10;
+            //String result="";
             String s1 = "";
+            if (div>1) {
+                switch (div) {
+                    case 2:
+                        s1 = "twenty";
+                        break;
+                    case 3:
+                        s1 = "thirty";
+                        break;
+                    case 4:
+                        s1 = "forty";
+                        break;
+                    case 5:
+                        s1 = "fifty";
+                        break;
+                    case 6:
+                        s1 = "sixty";
+                        break;
+                    case 7:
+                        s1 = "seventy";
+                        break;
+                    case 8:
+                        s1 = "eighty";
+                        break;
+                    case 9:
+                        s1 = "ninety";
+                        break;
+                }
+                //result+=s1;
+            }
             String s2 = "";
-            switch (div) {
-                case 2:
-                    s1 = "twenty";
-                    break;
-                case 3:
-                    s1 = "thirty";
-                    break;
-                case 4:
-                    s1 = "fourty";
-                    break;
-                case 5:
-                    s1 = "fifty";
-                    break;
-                case 6:
-                    s1 = "sixty";
-                    break;
-                case 7:
-                    s1 = "seventy";
-                    break;
-                case 8:
-                    s1 = "eighty";
-                    break;
-                case 9:
-                    s1 = "ninty";
-                    break;
+            if (mod>0) {
+                switch (mod) {
+                    case 1:
+                        s2 = "one";
+                        break;
+                    case 2:
+                        s2 = "two";
+                        break;
+                    case 3:
+                        s2 = "three";
+                        break;
+                    case 4:
+                        s2 = "four";
+                        break;
+                    case 5:
+                        s2 = "five";
+                        break;
+                    case 6:
+                        s2 = "six";
+                        break;
+                    case 7:
+                        s2 = "seven";
+                        break;
+                    case 8:
+                        s2 = "eight";
+                        break;
+                    case 9:
+                        s2 = "nine";
+                        break;
+                }
+               // result+=s2;
             }
-            switch (mod) {
-                case 1:
-                    s2 = "one";
-                    break;
-                case 2:
-                    s2 = "two";
-                    break;
-                case 3:
-                    s2 = "three";
-                    break;
-                case 4:
-                    s2 = "four";
-                    break;
-                case 5:
-                    s2 = "five";
-                    break;
-                case 6:
-                    s2 = "six";
-                    break;
-                case 7:
-                    s2 = "seven";
-                    break;
-                case 8:
-                    s2 = "eight";
-                    break;
-                case 9:
-                    s2 = "nine";
-                    break;
+            if ((!s1.equals(""))&&(!s2.equals(""))){
+                result=s1+" "+s2;
+            }else{
+                if (s1.equals(""))
+                        result=s2;
+                else result=s1;
             }
-            s = s1 +" "+ s2;
         }
-        return s;
+        return result;
     }
 }
