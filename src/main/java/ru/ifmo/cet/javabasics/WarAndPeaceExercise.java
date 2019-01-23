@@ -11,9 +11,9 @@ import java.io.IOException;
 
 
 public class WarAndPeaceExercise {
-  //  public static String warAndPeace(){
 
     public static String warAndPeace() throws IOException {
+
             final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
             final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
 
@@ -21,22 +21,28 @@ public class WarAndPeaceExercise {
             // TODO Iff word "котик" occurred in text 23 times then its entry would be "котик - 23\n".
             // TODO Entries in final String should be also sorted by amount and then in alphabetical order iff needed.
             // TODO Also omit any word with lengths less than 4 and frequency less than 10
+            //throw new UnsupportedOperationException();
             Map<String, Integer> dictionary = new HashMap<>();
+            Charset set = Charset.forName("windows-1251");
+            List<String> book = readAllLines(tome12Path, set);
+            book.addAll(readAllLines(tome34Path, set));
+            String text = book.toString();
+            text = text.replaceAll("[^a-zA-Zа-яА-Я]", " ").toLowerCase();
+            Stream.of(text.split(" "))
+                    .map(String::toString)
+                    .filter(word -> word.length() > 3)
+                    .forEach(word -> dictionary.put(word, dictionary.getOrDefault(word, 0) + 1));
+            ArrayList<Map.Entry<String, Integer>> words = new ArrayList<>(dictionary.entrySet());
+            words.sort(Comparator.comparing(Map.Entry::getKey));
+            words.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
+            String res = "";
+            res = words.stream()
+                    .filter(entry -> entry.getValue() > 9)
+                    .map(entry -> entry.getKey() + " - " + entry.getValue())
+                    .collect(Collectors.joining("\n"));
 
-            throw new UnsupportedOperationException();
-
-        String book = String.join(" ",readAllLines(tome12Path, Charset.forName("windows-1251")));
-        book+=String.join(" ",readAllLines(tome34Path, Charset.forName("windows-1251")));
-        book=book.replaceAll("[^a-zA-Zа-яА-Я]", " ").toLowerCase();
-        Stream<String> words = Stream.of(book.split(" "));
-        words.filter(word->word.length()>=4);
-        words.forEach((String key) -> dictionary.put(key, dictionary.containsKey(key) ? dictionary.get(key) + 1 : 1));
-        List<Map.Entry<String,Integer>> res = new ArrayList<>(dictionary.entrySet());
-        res.sort((entry1, entry2)->(entry1.getValue().equals(entry2.getValue())) ?
-                entry1.getKey().compareTo(entry2.getKey()) : entry2.getValue().compareTo(entry1.getValue()));
-        String result = res.stream().filter(c->c.getValue()>=10)
-                .map(a -> a.getKey() + " - " + a.getValue()).map(Object::toString);
-        return result;
+        //throw new UnsupportedOperationException();
+            return res.trim();
 
 
     }
